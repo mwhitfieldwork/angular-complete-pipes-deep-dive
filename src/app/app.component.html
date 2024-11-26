@@ -8,10 +8,11 @@
         <!-- the configuration for pipes are AFTER THE COLON-->
       </div>
     </header>
-    <p>New York: {{ currentTemperaturs.newYork | temperature }}</p>
-    <p>Berlin: {{ currentTemperaturs.berlin | number: '1.1-2' }}</p>
-    <p>Paris: {{ currentTemperaturs.paris | number: '1.1-2' }}</p>
-    <p>Chicago: {{ currentTemperaturs.chicago | number: '1.1-2' }}</p>
+    <p>New York: {{ currentTemperaturs.newYork | number: '1.1-2' | temperature:'cel':'fah'}}</p>
+                                              <!-- you can chain pipes  -->
+    <p>Berlin: {{ currentTemperaturs.berlin  | temperature:'cel'}}</p>
+    <p>Paris: {{ currentTemperaturs.paris  | temperature:'fah':'cel'}}</p>
+    <p>Chicago: {{ currentTemperaturs.chicago | temperature:'fah'}}</p>
   </article>
 
   <article class="temperatures">
@@ -23,8 +24,8 @@
       </div>
     </header>
     <ul>
-      @for (temperature of historicTemperatures; track temperature) {
-      <li (click)="onReset($index)">{{ temperature }}</li>
+      @for (temperature of historicTemperatures |sort; track temperature) {
+      <li (click)="onReset($index)">{{ temperature | temperature:'cel'}}</li>
       }
     </ul>
   </article>
